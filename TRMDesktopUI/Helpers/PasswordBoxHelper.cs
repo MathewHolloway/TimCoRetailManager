@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
+//https://stackoverflow.com/questions/30631522/caliburn-micro-support-for-passwordbox
+
 namespace TRMDesktopUI.Helpers
 {
     public static class PasswordBoxHelper
