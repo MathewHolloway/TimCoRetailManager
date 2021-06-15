@@ -1,6 +1,7 @@
 ﻿using Caliburn.Micro;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,6 +18,13 @@ namespace TRMDesktopUI
         private SimpleContainer _container = new SimpleContainer();
         public Bootstrapper()
         {
+            //CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("en-GB");
+            //CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("en-GB");
+            var cultureInfo = CultureInfo.GetCultureInfo("en-GB");
+
+            CultureInfo.CurrentCulture = cultureInfo;
+            CultureInfo.CurrentUICulture = cultureInfo;
+
             Initialize();
 
             ConventionManager.AddElementConvention<PasswordBox>(
@@ -47,7 +55,15 @@ namespace TRMDesktopUI
 
         protected override void OnStartup(object sender, StartupEventArgs e)
         {
+            //var cultureInfo = CultureInfo.GetCultureInfo("en-GB");
+
+            //CultureInfo.CurrentCulture = cultureInfo;
+            //CultureInfo.CurrentUICulture = cultureInfo;
+            //CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("en-GB");
+            //CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("en-GB");
+
             DisplayRootViewFor<ShellViewModel>();
+
         }
 
         protected override object GetInstance(Type service, string key)

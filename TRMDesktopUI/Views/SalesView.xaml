@@ -34,7 +34,19 @@
                  MinHeight="200" MinWidth="150" SelectedItem="{ Binding SelectedProduct}" >
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding ProductName}" />
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="{Binding ProductName}" />
+                        <StackPanel Orientation="Horizontal">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Price: " FontSize="14"/>
+                                <TextBlock Text="{Binding RetailPrice, StringFormat={}{0:C}}" FontSize="14"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="5 0 0 0">
+                                <TextBlock Text="Quantity: " FontSize="14"/>
+                                <TextBlock Text="{Binding QuantityInStock}" FontSize="14"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
@@ -61,17 +73,17 @@
 
         <DockPanel Grid.Row="3" Grid.Column="2">
             <TextBlock Text="SubTotal: " Margin="0 0 15 0"/>
-            <TextBlock x:Name="SubTotal" Text="£0.00" Grid.Row="2" Grid.Column="2" TextAlignment="Right"/>
+            <TextBlock x:Name="SubTotal" Text="0.00" Grid.Row="2" Grid.Column="2" TextAlignment="Right"/>
         </DockPanel>
 
         <DockPanel Grid.Row="4" Grid.Column="2">
             <TextBlock Text="Tax: "/>
-            <TextBlock x:Name="Tax" Text="£0.00" Grid.Row="2" Grid.Column="2" TextAlignment="Right"/>
+            <TextBlock x:Name="Tax" Text="0.00" Grid.Row="2" Grid.Column="2" TextAlignment="Right"/>
         </DockPanel>
 
         <DockPanel Grid.Row="5" Grid.Column="2">
             <TextBlock Text="Total: "/>
-            <TextBlock x:Name="Total" Text="£0.00" Grid.Row="2" Grid.Column="2" TextAlignment="Right"/>
+            <TextBlock x:Name="Total" Text="0.00" Grid.Row="2" Grid.Column="2" TextAlignment="Right"/>
         </DockPanel>
 
         <Button x:Name="CheckOut" Grid.Row="6" Grid.Column="2" Content="Check Out"
