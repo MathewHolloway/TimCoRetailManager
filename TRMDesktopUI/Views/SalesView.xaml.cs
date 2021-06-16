@@ -24,5 +24,10 @@ namespace TRMDesktopUI.Views
         {
             InitializeComponent();
         }
+
+        private void Cart_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }
