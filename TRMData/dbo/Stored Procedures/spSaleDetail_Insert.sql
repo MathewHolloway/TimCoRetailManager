@@ -1,5 +1,5 @@
 ﻿CREATE PROCEDURE [dbo].[spSaleDetail_Insert]
-	@SaleID int,
+	@SaleId int,
 	@ProductId int,
 	@Quantity int,
 	@PurchasePrice money,
