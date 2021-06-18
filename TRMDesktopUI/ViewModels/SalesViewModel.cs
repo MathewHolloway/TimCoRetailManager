@@ -3,9 +3,11 @@ using Caliburn.Micro;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Dynamic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using TRMDesktopUI.Library.Api;
 using TRMDesktopUI.Library.Helpers;
 using TRMDesktopUI.Library.Models;
@@ -19,20 +21,47 @@ namespace TRMDesktopUI.ViewModels
         IConfigHelper _configHelper;
         ISaleEndpoint _saleEndpoint;
         IMapper _mapper;
+        private readonly StatusInfoViewModel _status;
+        private readonly IWindowManager _window;
 
         public SalesViewModel(IProductEndpoint productEndpoint, IConfigHelper ConfigHelper,
-            ISaleEndpoint saleEndpoint, IMapper mapper)
+            ISaleEndpoint saleEndpoint, IMapper mapper, IWindowManager window)
         {
             _productEndpoint = productEndpoint;
             _configHelper = ConfigHelper;
             _saleEndpoint = saleEndpoint;
             _mapper = mapper;
+            _window = window;
         }
 
         protected override async void OnViewLoaded(object view)
         {
             base.OnViewLoaded(view);
-            await LoadProducts();
+            try
+            {
+                await LoadProducts();
+            }
+            catch (Exception ex)
+            {
+                dynamic settings = new ExpandoObject();
+                settings.WindowStartUpLocation = WindowStartupLocation.CenterOwner;
+                settings.ResizeMode = ResizeMode.NoResize;
+                settings.Title = "System Error";
+
+                StatusInfoViewModel info = IoC.Get<StatusInfoViewModel>();
+
+                if (ex.Message == "Unauthorised")
+                {
+                    _status.UpdateMessage("Unauthorised Access", "You do not have permission to interact with the sales form");
+                    await _window.ShowDialogAsync(_status, null, settings);
+                }
+                else
+                {
+                    _status.UpdateMessage("Fata Exception", ex.Message);
+                    await _window.ShowDialogAsync(_status, null, settings);
+                }
+                await TryCloseAsync();
+            }
         }
 
         private async Task LoadProducts()
