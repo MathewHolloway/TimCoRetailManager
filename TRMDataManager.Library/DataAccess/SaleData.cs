@@ -13,7 +13,7 @@ namespace TRMDataManager.Library.DataAccess
 
         public void SaveSale(SaleModel saleInfo, string cashierId)
         {
-            //TODO: Makle this solid/Dry/Better
+            //TODO: Make this solid/Dry/Better
             //Start filling in the models we will save to the database
             List<SaleDetailDBModel> details = new List<SaleDetailDBModel>();
             ProductData products = new ProductData();
@@ -37,7 +37,7 @@ namespace TRMDataManager.Library.DataAccess
                 detail.PurchasePrice = (productInfo.RetailPrice * detail.Quantity);
 
                 if (productInfo.IsTaxable)
-                {  
+                {
                     detail.Tax = (detail.PurchasePrice * taxRate);
                 }
 
