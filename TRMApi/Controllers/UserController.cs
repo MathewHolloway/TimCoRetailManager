@@ -10,6 +10,7 @@ using TRMDataManager.Library.DataAccess;
 using TRMApi.Data;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 
 namespace TRMApi.Controllers
 {
@@ -21,11 +22,15 @@ namespace TRMApi.Controllers
         List<ApplicationUserModel> output = new List<ApplicationUserModel>();
         private readonly ApplicationDbContext _context;
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly IConfiguration _config;
 
-        public UserController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
+        public UserController(ApplicationDbContext context,
+            UserManager<IdentityUser> userManager,
+            IConfiguration config)
         {
             _context = context;
             _userManager = userManager;
+            _config = config;
         }
 
 
@@ -33,7 +38,7 @@ namespace TRMApi.Controllers
         {
             string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            UserData data = new UserData();
+            UserData data = new UserData(_config);
 
             return data.GetUserById(userId).First();
         }
