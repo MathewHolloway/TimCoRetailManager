@@ -81,7 +81,7 @@ namespace TRMDesktopUI
             //CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("en-GB");
             //CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("en-GB");
 
-            DisplayRootViewFor<ShellViewModel>();
+            DisplayRootViewFor<ShellViewModel>();           
 
         }
 
