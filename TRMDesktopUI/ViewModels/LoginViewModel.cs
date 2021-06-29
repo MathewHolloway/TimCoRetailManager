@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using TRMDesktopUI.EventModels;
 using TRMDesktopUI.Library.Api;
 
@@ -12,7 +13,7 @@ namespace TRMDesktopUI.ViewModels
     public class LoginViewModel : Screen
     {
         private string _userName = "mathewholloway1981@gmail.com";
-        private string _password = "MattGwent69#";
+        private string _password;
         private IApiHelper _apiHelper;
         private IEventAggregator _events;
 
