@@ -33,7 +33,7 @@ namespace TRMApi.Controllers
             _config = config;
         }
 
-
+        [HttpGet]
         public UserModel GetById()
         {
             string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
