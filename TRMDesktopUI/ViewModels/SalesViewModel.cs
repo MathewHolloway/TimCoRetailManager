@@ -60,7 +60,8 @@ namespace TRMDesktopUI.ViewModels
                     _status.UpdateMessage("Fata Exception", ex.Message);
                     await _window.ShowDialogAsync(_status, null, settings);
                 }
-                await TryCloseAsync();
+                
+                TryCloseAsync();
             }
         }
 
